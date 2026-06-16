@@ -36,6 +36,33 @@ Follow these steps to enable the date picker globally across all your Excel file
 
 ---
 
+## ⌨️ Keyboard Shortcuts & Customization
+
+By default, the Add-in registers a global keyboard shortcut to open the date picker dialog at the active cell.
+
+*   **Default Shortcut:** `Ctrl + \`` (Control + Backtick / Grave Accent key, typically located below `Esc` and next to the number `1` key).
+*   **How it works:** Select any cell and press `Ctrl + \`` to open the calendar. Choosing a date will automatically write it to the cell in `dd/mm/yyyy` format.
+
+### How to Modify the Shortcut Key:
+If you want to change the shortcut to a different key combination (e.g. `Ctrl + Shift + D` or `Ctrl + m`):
+
+1.  Press `ALT + F11` to open the VBA Editor.
+2.  In the Project Explorer (left panel), expand the `QuickDataPicker (QuickDataPicker.xlam)` project.
+3.  Double-click on the `ThisWorkbook` object.
+4.  Find the `Workbook_Open` subroutine:
+    ```vba
+    Private Sub Workbook_Open()
+        Application.OnKey "^`", "OpenCalendar_CtrlSemicolon"
+    End Sub
+    ```
+5.  Change the key code string `"^`"` to your preferred shortcut:
+    *   `Ctrl + Shift + D` -> `"+^D"` (where `+` is Shift, `^` is Ctrl)
+    *   `Ctrl + m` -> `"^m"`
+    *   `Ctrl + Shift + C` -> `"+^C"`
+6.  Save the project (`Ctrl + S` in the VBA window) to apply the change globally.
+
+---
+
 ## 💻 Developer Guide & VBA Integration
 
 To trigger the calendar form automatically when a user double-clicks specific input cells:
