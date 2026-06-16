@@ -14,7 +14,7 @@ Sub AdvancedCalendar()
         OkayButton:=True, _
         ShowWeekNumbers:=True, _
         BackgroundColor:=RGB(243, 249, 251), _
-        HeaderColor:=RGB(147, 205, 2221), _
+        HeaderColor:=RGB(147, 205, 221), _
         HeaderFontColor:=RGB(255, 255, 255), _
         SubHeaderColor:=RGB(223, 240, 245), _
         SubHeaderFontColor:=RGB(31, 78, 120), _
