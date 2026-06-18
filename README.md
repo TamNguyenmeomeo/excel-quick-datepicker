@@ -23,6 +23,42 @@ A lightweight, modern, and highly customizable Microsoft Excel Add-in (`.xlam`) 
 
 ---
 
+## 📘 Detailed End-User Guide & Explanation
+
+This Excel add-in eliminates the hassle of manually typing dates—which often leads to typing errors or incorrect date formatting (`dd/mm/yyyy` vs `mm/dd/yyyy`). 
+
+### 1. Opening the Date Picker via Keyboard Shortcut
+Once the add-in is installed:
+*   Select any cell in Excel and press **`Ctrl + \``** (Control + Backtick key, located right below the `Esc` key and to the left of the `1` key).
+*   The interactive calendar window will pop up at the cell position.
+*   Select your desired date and click **OK** (or double-click the date). The chosen date is written to the cell in the standard `dd/mm/yyyy` format.
+
+### 2. Auto-Highlighting Pre-existing Dates
+If the selected cell already contains a date (e.g. `20/09/2026`), the calendar will automatically launch displaying September 2026 with the 20th day highlighted. This allows you to quickly adjust dates without starting from scratch.
+
+### 3. Smart Developer Integration (Double-Click Trigger)
+Excel template designers can configure the date picker to launch automatically when a user double-clicks specific input cells:
+1.  Press **`ALT + F11`** to open the VBA Editor.
+2.  Double-click the target worksheet (e.g. `Sheet1`) in the left panel.
+3.  Paste the event handler code:
+    ```vba
+    Private Sub Worksheet_BeforeDoubleClick(ByVal Target As Range, Cancel As Boolean)
+        ' Check if double-clicked cell is our date field H16
+        If Not Intersect(Target, Range("H16")) Is Nothing Then
+            Cancel = True ' Prevent Excel from opening edit mode
+            
+            Dim dateVal As Variant
+            dateVal = CalendarForm.GetDate ' Open calendar popup
+            
+            If dateVal <> 0 Then 
+                Target.Value = dateVal ' Save chosen date
+            End If
+        End If
+    End Sub
+    ```
+
+---
+
 ## 🛠️ Installation Guide
 
 Follow these steps to enable the date picker globally across all your Excel files:
